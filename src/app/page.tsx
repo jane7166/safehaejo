@@ -1,101 +1,160 @@
-import Image from "next/image";
+"use client";
+import React from "react";
+import styled from "styled-components";
+import { useRouter } from "next/navigation";
+import { FaHome, FaBell, FaShieldAlt, FaLock } from "react-icons/fa";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+interface Category {
+  text: string;
+  link: string;
+  icon: JSX.Element;
 }
+
+const categories: Category[] = [
+  { text: "주거 침입 범죄 예방", link: "main/home-safety", icon: <FaHome /> },
+  { text: "여성 안심 서비스", link: "/main/safety-service", icon: <FaShieldAlt /> },
+  { text: "보안장치 추천", link: "/main/safety-defense", icon: <FaLock /> },
+];
+
+const CategoryPage: React.FC = () => {
+  const router = useRouter();
+
+  const handleCardClick = (link: string) => {
+    router.push(link);
+  };
+
+  return (
+    <MainContainer>
+      <ContentWrapper>
+        <TextSection>
+          <Title>여성 1인가구 안전해조</Title>
+          <Description>
+            서울여자대학교 바롬종합설계프로젝트
+            <br />
+            여성 가구가 조금 더 안전하게 생활할 수 있도록 도움을 주기 위한 가이드라인입니다.
+          </Description>
+        </TextSection>
+
+        <CardSection>
+          {categories.map((category, index) => (
+            <InfoCard key={index} onClick={() => handleCardClick(category.link)}>
+              <IconContainer>{category.icon}</IconContainer>
+              <CardText>{category.text}</CardText>
+            </InfoCard>
+          ))}
+        </CardSection>
+      </ContentWrapper>
+    </MainContainer>
+  );
+};
+
+export default CategoryPage;
+
+// Styled Components
+const MainContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #b5c0e6, #f5f7fa);  
+  background-size: 200% 200%;
+  animation: gradientAnimation 10s ease infinite;
+  font-family: Arial, sans-serif;
+  color: #333;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px; /* 전체 너비 설정 */
+  padding: 60px 20px;
+  text-align: center;
+`;
+
+const TextSection = styled.div`
+  margin-bottom: 40px;
+`;
+
+const Title = styled.h1`
+  font-size: 42px;
+  font-weight: 700;
+  color: #1f2a38;
+  margin-bottom: 20px;
+`;
+
+const Description = styled.p`
+  font-size: 18px;
+  color: #5f6d7a;
+  line-height: 1.8;
+  max-width: 500px;
+`;
+
+const CardSection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px; /* CardSection의 최대 너비 설정 */
+`;
+
+const InfoCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 200px; /* 한 줄에 4개씩 배치될 수 있도록 너비 조정 */
+  height: 180px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const IconContainer = styled.div`
+  font-size: 36px;
+  color: #4a5568;
+  margin-bottom: 10px;
+`;
+
+const CardText = styled.h3`
+  font-size: 18px;
+  color: #4a5568;
+  text-align: center;
+  font-weight: 500;
+`;
