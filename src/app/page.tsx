@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
-import { FaHome, FaBell, FaShieldAlt, FaLock } from "react-icons/fa";
+import { FaHome, FaShieldAlt, FaLock } from "react-icons/fa";
 
 interface Category {
   text: string;
@@ -92,9 +92,6 @@ const MainContainer = styled.div`
   }
 `;
 
-// 나머지 코드 동일
-
-
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -157,7 +154,7 @@ const IconContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-const CardText = styled.h3`
+const CardText = styled.h2`  // <h3>에서 <h2>로 수정
   font-size: 18px;
   color: #4a5568;
   text-align: center;
