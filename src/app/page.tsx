@@ -24,27 +24,29 @@ const CategoryPage: React.FC = () => {
   };
 
   return (
-    <MainContainer>
-      <ContentWrapper>
-        <TextSection>
-          <Title>여성 1인가구 안전해조</Title>
-          <Description>
-            서울여자대학교 바롬종합설계프로젝트
-            <br />
-            여성 가구가 조금 더 안전하게 생활할 수 있도록 도움을 주기 위한 가이드라인입니다.
-          </Description>
-        </TextSection>
+    <main>
+      <MainContainer>
+        <ContentWrapper>
+          <TextSection>
+            <Title>여성 1인가구 안전해조</Title>
+            <Description>
+              서울여자대학교 바롬종합설계프로젝트
+              <br />
+              여성 가구가 조금 더 안전하게 생활할 수 있도록 도움을 주기 위한 가이드라인입니다.
+            </Description>
+          </TextSection>
 
-        <CardSection>
-          {categories.map((category, index) => (
-            <InfoCard key={index} onClick={() => handleCardClick(category.link)}>
-              <IconContainer>{category.icon}</IconContainer>
-              <CardText>{category.text}</CardText>
-            </InfoCard>
-          ))}
-        </CardSection>
-      </ContentWrapper>
-    </MainContainer>
+          <CardSection>
+            {categories.map((category, index) => (
+              <InfoCard key={index} onClick={() => handleCardClick(category.link)}>
+                <IconContainer>{category.icon}</IconContainer>
+                <CardText>{category.text}</CardText>
+              </InfoCard>
+            ))}
+          </CardSection>
+        </ContentWrapper>
+      </MainContainer>
+    </main>
   );
 };
 
@@ -89,6 +91,9 @@ const MainContainer = styled.div`
     }
   }
 `;
+
+// 나머지 코드 동일
+
 
 const ContentWrapper = styled.div`
   display: flex;
