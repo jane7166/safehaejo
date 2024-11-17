@@ -9,5 +9,10 @@ module.exports = {
   plugins: [["styled-components", { "ssr": true }]],
 };
 
+module.exports = {
+  compiler: {
+    styledComponents: true,
+  },
+};
 
 export default nextConfig;
