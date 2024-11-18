@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
+import { Analytics } from "@vercel/analytics/next";
 import { useRouter } from "next/navigation";
 import { FaHome, FaShieldAlt, FaLock } from "react-icons/fa";
 
@@ -35,7 +36,7 @@ const CategoryPage: React.FC = () => {
               여성 가구가 조금 더 안전하게 생활할 수 있도록 도움을 주기 위한 가이드라인입니다.
             </Description>
           </TextSection>
-
+          <Analytics/>
           <CardSection>
             {categories.map((category, index) => (
               <InfoCard key={index} onClick={() => handleCardClick(category.link)}>
